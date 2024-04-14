@@ -137,7 +137,9 @@ class WolframAlphaOracle:
 
         while retries < cls.MAX_RETRIES:
             try:
-                response = requests.get(cls.BASE_URL, params=params, timeout=60)
+                response = requests.get(
+                    cls.BASE_URL, params=params, timeout=60
+                )
                 response.raise_for_status()
                 return response.text
             except requests.HTTPError as e:

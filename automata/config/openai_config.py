@@ -1,10 +1,7 @@
 """A config for the OpenAI Automata Agent."""
 from typing import Optional
 
-from automata.config import (
-    AgentConfig,
-    ModelInformation,
-)
+from automata.config import AgentConfig, ModelInformation
 
 SUPPORTED_MODEL_INFORMATION = {
     "gpt-4": ModelInformation(

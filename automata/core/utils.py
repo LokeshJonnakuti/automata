@@ -5,6 +5,8 @@ import json
 import logging
 import logging.config
 import os
+import time
+from functools import wraps
 from typing import (
     Any,
     Dict,
@@ -19,8 +21,6 @@ from typing import (
 
 import colorlog
 import openai
-import time
-from functools import wraps
 
 
 def get_root_py_fpath() -> str:
@@ -209,13 +209,19 @@ def is_sorted(lst: list) -> bool:
     return all(a <= b for a, b in zip(lst, lst[1:]))
 
 
-def retry(max_retries: int = 3, initial_delay: float = 1.0, max_delay: Optional[float] = None, allowed_exceptions: Tuple[Type[BaseException], ...] = ()) -> Any:
+def retry(
+    max_retries: int = 3,
+    initial_delay: float = 1.0,
+    max_delay: Optional[float] = None,
+    allowed_exceptions: Tuple[Type[BaseException], ...] = (),
+) -> Any:
     """
     Retry calling the decorated function using an exponential backoff.
     """
 
     def decorator(func: Any) -> Any:
         """A decorator for retrying a function or method in case of exceptions with exponential backoff."""
+
         @wraps(func)
         def wrapper(*args, **kwargs) -> Any:
             """A wrapper for retrying a function or method in case of exceptions with exponential backoff."""

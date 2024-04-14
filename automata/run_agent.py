@@ -3,11 +3,12 @@
 This script is used to run an agent with a given set of instructions and tools.
 """
 import argparse
-import os
-import openai
 import logging
 import logging.config
+import os
 from typing import Optional
+
+import openai
 
 from automata.agent import OpenAIAutomataAgent
 from automata.config.openai_config import (

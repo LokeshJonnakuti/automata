@@ -1,14 +1,6 @@
 import json
 from abc import ABC, abstractmethod
-from typing import (
-    Any,
-    Dict,
-    NamedTuple,
-    Optional,
-    Sequence,
-    Tuple,
-    Union,
-)
+from typing import Any, Dict, NamedTuple, Optional, Sequence, Tuple, Union
 
 from pydantic import BaseModel
 
