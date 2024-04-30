@@ -8,7 +8,6 @@ handle querying the API and processing responses.
 import logging
 import logging.config
 import os
-import random
 import time
 from enum import Enum
 from typing import Optional
@@ -17,6 +16,7 @@ import dotenv
 import requests
 
 from automata.core.utils import get_logging_config
+import secrets
 
 logger = logging.getLogger(__name__)
 logging.config.dictConfig(get_logging_config())
@@ -147,7 +147,7 @@ class WolframAlphaOracle:
                 ):
                     return response.text
                 elif retries < cls.MAX_RETRIES - 1:
-                    jitter = random.uniform(0, 0.1 * delay)
+                    jitter = secrets.SystemRandom().uniform(0, 0.1 * delay)
                     time_to_wait = delay + jitter
                     logger.warning(
                         f"Error occurred: {e}. Retrying in {time_to_wait:.2f} seconds..."
@@ -163,7 +163,7 @@ class WolframAlphaOracle:
                 requests.RequestException,
             ) as e:
                 if retries < cls.MAX_RETRIES - 1:
-                    jitter = random.uniform(0, 0.1 * delay)
+                    jitter = secrets.SystemRandom().uniform(0, 0.1 * delay)
                     time_to_wait = delay + jitter
                     logger.warning(
                         f"Error occurred: {e}. Retrying in {time_to_wait:.2f} seconds..."
