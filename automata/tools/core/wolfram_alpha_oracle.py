@@ -17,6 +17,7 @@ import dotenv
 import requests
 
 from automata.core.utils import get_logging_config
+from security import safe_requests
 
 logger = logging.getLogger(__name__)
 logging.config.dictConfig(get_logging_config())
@@ -137,7 +138,7 @@ class WolframAlphaOracle:
 
         while retries < cls.MAX_RETRIES:
             try:
-                response = requests.get(cls.BASE_URL, params=params)
+                response = safe_requests.get(cls.BASE_URL, params=params)
                 response.raise_for_status()
                 return response.text
             except requests.HTTPError as e:
